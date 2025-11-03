@@ -1,13 +1,23 @@
 FROM nginx:alpine
 
-# Créer les certificats SSL auto-signés
-RUN apk add --no-cache openssl \
-    && mkdir -p /etc/nginx/ssl \
-    && openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-        -keyout /etc/nginx/ssl/nginx.key \
-        -out /etc/nginx/ssl/nginx.crt \
-        -subj "/C=FR/ST=Paris/L=Paris/O=42/CN=drongier.42.fr"
+# Installer OpenSSL pour générer les certificats SSL
+RUN apk add --no-cache openssl
 
+# Copier la configuration Nginx personnalisée
 COPY conf/default.conf /etc/nginx/conf.d/
+
+# Copier le script de démarrage
+COPY tools/start-nginx.sh /usr/local/bin/start-nginx.sh
+
+# Rendre le script exécutable
+RUN chmod +x /usr/local/bin/start-nginx.sh
+
+# Créer le dossier pour le site web
+RUN mkdir -p /var/www/html \
+    && echo '<html><body><h1>Nginx fonctionne!</h1><p>Serveur HTTPS actif</p></body></html>' > /var/www/html/index.html
+
+# Exposer le port HTTPS
 EXPOSE 443
-CMD ["nginx", "-g", "daemon off;"]
+
+# Lancer le script de démarrage
+CMD ["start-nginx.sh"]
