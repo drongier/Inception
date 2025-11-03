@@ -11,14 +11,30 @@ services:
     networks:
       - inception
 
+  wordpress:
+    build: ./srcs/php
+    container_name: wordpress
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+
   nginx:
     build: ./srcs/nginx
     container_name: nginx
     restart: unless-stopped
     ports:
       - "443:443"
+    volumes:
+      - wordpress_data:/var/www/html
     networks:
       - inception
+    depends_on:
+      - wordpress
 
 volumes:
   mariadb_data:
@@ -26,7 +42,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /Users/${USER}/data/mariadb
+      device: /home/${USER}/data/mariadb
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${USER}/data/wordpress
 
 networks:
   inception:
