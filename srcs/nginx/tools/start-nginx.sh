@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-echo "🔐 Génération des certificats SSL..."
+echo "Génération certificats SSL..."
 
 # Créer le dossier pour les certificats s'il n'existe pas
 mkdir -p /etc/nginx/ssl
@@ -10,14 +10,13 @@ mkdir -p /etc/nginx/ssl
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/nginx.key \
     -out /etc/nginx/ssl/nginx.crt \
-    -subj "/C=FR/ST=Paris/L=Paris/O=42/CN=${DOMAIN_NAME:-drongier.42.fr}"
+    -subj "/C=DE/ST=Berlin/L=Berlin/O=42/CN=${DOMAIN_NAME:-drongier.42.fr}"
 
-echo "✅ Certificats SSL générés"
+echo "Certificats SSL generated"
 
-# Vérifier que la configuration Nginx est valide
-echo "🔍 Vérification de la configuration Nginx..."
+echo "Check config Nginx..."
 nginx -t
 
-echo "🚀 Démarrage de Nginx..."
+echo "Starting Nginx..."
 # Lancer Nginx en mode non-daemon (premier plan)
 exec nginx -g "daemon off;"

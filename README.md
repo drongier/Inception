@@ -65,3 +65,10 @@ inception/
 * Easier debugging
 * Better project readability
 * Modular and extendable (e.g., adding Redis, Adminer, etc.)
+
+
+**Commands:**
+
+nobody:nobody
+docker exec -it wordpress sh
+ls -la /var/www/html

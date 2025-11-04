@@ -6,10 +6,9 @@ RUN apk add --no-cache openssl
 # Copier la configuration Nginx personnalisée
 COPY conf/default.conf /etc/nginx/conf.d/
 
-# Copier le script de démarrage
 COPY tools/start-nginx.sh /usr/local/bin/start-nginx.sh
 
-# Rendre le script exécutable
+#Make executable
 RUN chmod +x /usr/local/bin/start-nginx.sh
 
 # Exposer le port HTTPS
