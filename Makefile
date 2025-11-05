@@ -16,26 +16,21 @@ DATA_PATH = /home/drongier/data
 all: build up
 
 build:
-	@echo "Building Docker images..."
 	docker compose -f $(COMPOSE_FILE) build
 
 up:
-	@echo "Starting containers..."
 	docker compose -f $(COMPOSE_FILE) up -d
 	@echo "Ready !"
 	@echo "Site is available at: https://drongier.42.fr"
 	@echo "Admin login: https://drongier.42.fr/wp-login.php\n"
 
 down:
-	@echo "Stopping containers..."
 	docker compose -f $(COMPOSE_FILE) down
 
 clean: down
-	@echo "Cleaning containers and images..."
 	docker compose -f $(COMPOSE_FILE) down -v --rmi all
 
 fclean: clean
-	@echo "Full clean: removing volumes and data..."
 	docker system prune -af --volumes
 	@sudo rm -rf $(DATA_PATH)/wordpress
 	@sudo rm -rf $(DATA_PATH)/mariadb

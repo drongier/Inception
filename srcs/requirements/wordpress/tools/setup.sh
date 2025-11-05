@@ -15,7 +15,6 @@ if [ ! -f "wp-config.php" ]; then
     tar -xzf latest.tar.gz --strip-components=1
     rm latest.tar.gz
 
-    # Create wp-config.php
     cp wp-config-sample.php wp-config.php
     sed -i "s/database_name_here/${WORDPRESS_DB_NAME}/" wp-config.php
     sed -i "s/username_here/${WORDPRESS_DB_USER}/" wp-config.php
