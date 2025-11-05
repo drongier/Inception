@@ -22,7 +22,7 @@ if [ ! -f "wp-config.php" ]; then
     sed -i "s/password_here/${WORDPRESS_DB_PASSWORD}/" wp-config.php
     sed -i "s/localhost/${WORDPRESS_DB_HOST}/" wp-config.php
 
-    echo "WordPress installed !"
+    echo "WordPress downloaded and configured!"
 else
     echo "WordPress already installed, skipping setup..."
 fi

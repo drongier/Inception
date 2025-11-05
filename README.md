@@ -84,6 +84,11 @@ docker exec mariadb ps aux
 docker compose down -v --rmi all
 docker system prune -af --volumes
 
+*Login
+
+https://drongier.42.fr/wp-login.php
+
+
 **Questions:**
 
 Utiliser la derniere version d'alpine 3.22 ? 

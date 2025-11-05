@@ -17,13 +17,14 @@ all: build up
 
 build:
 	@echo "Building Docker images..."
-	@mkdir -p $(DATA_PATH)/wordpress
-	@mkdir -p $(DATA_PATH)/mariadb
 	docker compose -f $(COMPOSE_FILE) build
 
 up:
 	@echo "Starting containers..."
 	docker compose -f $(COMPOSE_FILE) up -d
+	@echo "Ready !"
+	@echo "Site is available at: https://drongier.42.fr"
+	@echo "Admin login: https://drongier.42.fr/wp-login.php\n"
 
 down:
 	@echo "Stopping containers..."
