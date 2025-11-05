@@ -55,5 +55,5 @@ echo "   📊 Base de données : ${MYSQL_DATABASE}"
 echo "   👤 Utilisateur : ${MYSQL_USER}"
 
 # Lancer MariaDB en mode normal
-echo "🚀 Démarrage de MariaDB..."
+echo "Démarrage de MariaDB..."
 exec mysqld --user=mysql --console --bind-address=0.0.0.0 --port=3306 --skip-networking=0

@@ -72,3 +72,20 @@ inception/
 nobody:nobody
 docker exec -it wordpress sh
 ls -la /var/www/html
+
+*check PID 1
+
+docker exec nginx ps aux
+docker exec wordpress ps aux
+docker exec mariadb ps aux
+
+*clean volume et dockers
+
+docker compose down -v --rmi all
+docker system prune -af --volumes
+
+**Questions:**
+
+Utiliser la derniere version d'alpine 3.22 ? 
+Ok si pas de folder secret ?
+

@@ -1,6 +1,6 @@
 services:
   mariadb:
-    build: ./srcs/mariadb
+    build: ./requirements/mariadb
     container_name: mariadb
     restart: unless-stopped
     env_file: .env
@@ -10,7 +10,7 @@ services:
       - inception
 
   wordpress:
-    build: ./srcs/php
+    build: ./requirements/wordpress
     container_name: wordpress
     restart: unless-stopped
     env_file: .env
@@ -22,7 +22,7 @@ services:
       - mariadb
 
   nginx:
-    build: ./srcs/nginx
+    build: ./requirements/nginx
     container_name: nginx
     restart: unless-stopped
     ports:

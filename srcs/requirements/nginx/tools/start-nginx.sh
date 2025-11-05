@@ -1,12 +1,12 @@
 #!/bin/sh
 set -e
 
-echo "Génération certificats SSL..."
+echo "Generation certificats SSL..."
 
-# Créer le dossier pour les certificats s'il n'existe pas
+# Create folder if doesnt exist
 mkdir -p /etc/nginx/ssl
 
-# Générer les certificats SSL au démarrage du conteneur
+# Generating certificats
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/nginx.key \
     -out /etc/nginx/ssl/nginx.crt \
@@ -18,5 +18,5 @@ echo "Check config Nginx..."
 nginx -t
 
 echo "Starting Nginx..."
-# Lancer Nginx en mode non-daemon (premier plan)
+
 exec nginx -g "daemon off;"

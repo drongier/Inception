@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.22
 
 # Installer MariaDB et les outils nécessaires
 RUN apk add --no-cache \
