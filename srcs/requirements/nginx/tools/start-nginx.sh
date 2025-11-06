@@ -3,10 +3,8 @@ set -e
 
 echo "Generation certificats SSL..."
 
-# Create folder if doesnt exist
 mkdir -p /etc/nginx/ssl
 
-# Generating certificats
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/nginx.key \
     -out /etc/nginx/ssl/nginx.crt \

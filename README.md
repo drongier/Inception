@@ -94,3 +94,20 @@ https://drongier.42.fr/wp-login.php
 Utiliser la derniere version d'alpine 3.22 ? 
 Ok si pas de folder secret ?
 
+**Lexique**
+
+php82 : PHP core
+php82-fpm : serveur PHP
+php82-mysqli : MySQL driver
+php82-json : JSON support
+php82-curl : HTTP client
+php82-mbstring : UTF-8 support
+php82-openssl : SSL/HTTPS
+php82-xml : XML parser
+php82-zip : ZIP support
+php82-gd : images (JPEG/PNG)
+php82-session : sessions utilisateur
+php82-zlib : compression
+wget : downloader
+tar : décompression
+

@@ -6,7 +6,7 @@
 #    By: drongier <drongier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/05 11:05:00 by drongier          #+#    #+#              #
-#    Updated: 2025/11/05 11:05:00 by drongier         ###   ########.fr        #
+#    Updated: 2025/11/06 12:15:03 by drongier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ build:
 up:
 	docker compose -f $(COMPOSE_FILE) up -d
 	@echo "Ready !"
-	@echo "Site is available at: https://drongier.42.fr"
-	@echo "Admin login: https://drongier.42.fr/wp-login.php\n"
+	@echo "Site available at: https://drongier.42.fr"
+	@echo "Login: https://drongier.42.fr/wp-login.php\n"
 
 down:
 	docker compose -f $(COMPOSE_FILE) down

@@ -1,28 +1,12 @@
 #!/bin/sh
 set -e
 
-echo "🗄️  Initialisation de MariaDB..."
-
-# Vérifier que les variables d'environnement sont définies
-if [ -z "$MYSQL_ROOT_PASSWORD" ] || [ -z "$MYSQL_DATABASE" ] || [ -z "$MYSQL_USER" ] || [ -z "$MYSQL_PASSWORD" ]; then
-    echo "Erreur : Variables d'environnement manquantes !"
-    echo "Requis : MYSQL_ROOT_PASSWORD, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD"
-    exit 1
-fi
+echo "Initialisation de MariaDB..."
 
 # Vérifier si MariaDB est déjà initialisée
 if [ ! -d "/var/lib/mysql/mysql" ]; then
-    echo "📦 Première initialisation de MariaDB..."
-    
-    # Initialiser le répertoire de données MariaDB
     mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
-    
-    echo "✅ MariaDB initialisée"
-else
-    echo "✅ MariaDB déjà initialisée"
-fi
 
-# Démarrer MariaDB temporairement en arrière-plan pour la configuration
 echo "🔧 Configuration de la base de données..."
 mysqld --user=mysql --bootstrap << EOF
 USE mysql;
@@ -50,10 +34,5 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 FLUSH PRIVILEGES;
 EOF
 
-echo "✅ Base de données configurée"
-echo "   📊 Base de données : ${MYSQL_DATABASE}"
-echo "   👤 Utilisateur : ${MYSQL_USER}"
-
-# Lancer MariaDB en mode normal
 echo "Démarrage de MariaDB..."
 exec mysqld --user=mysql --console --bind-address=0.0.0.0 --port=3306 --skip-networking=0

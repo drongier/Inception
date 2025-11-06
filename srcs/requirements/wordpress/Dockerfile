@@ -1,6 +1,5 @@
 FROM alpine:3.22
 
-# Instal PHP-FPM and extensions for wordpress
 RUN apk add --no-cache \
     php82 \
     php82-fpm \ 
