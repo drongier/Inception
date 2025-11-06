@@ -69,6 +69,8 @@ inception/
 
 **Commands:**
 
+scp -r ./NOM_DU_REPO user@VM_IP:/chemin/cible/
+
 nobody:nobody
 docker exec -it wordpress sh
 ls -la /var/www/html
