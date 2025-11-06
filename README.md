@@ -69,7 +69,7 @@ inception/
 
 **Commands:**
 
-scp -r ./NOM_DU_REPO user@VM_IP:/chemin/cible/
+scp -P 2222 -r ./Ince drongier@localhost:
 
 nobody:nobody
 docker exec -it wordpress sh
