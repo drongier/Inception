@@ -17,6 +17,7 @@ if [ ! -f "wp-config.php" ]; then
     sed -i "s/username_here/${WORDPRESS_DB_USER}/" wp-config.php
     sed -i "s/password_here/${WORDPRESS_DB_PASSWORD}/" wp-config.php
     sed -i "s/localhost/${WORDPRESS_DB_HOST}/" wp-config.php
+fi
 
 chown -R nobody:nobody /var/www/html
 

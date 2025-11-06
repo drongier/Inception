@@ -1,38 +1,25 @@
 #!/bin/sh
 set -e
 
-echo "Initialisation de MariaDB..."
+echo "Initialisation MariaDB..."
 
-# Vérifier si MariaDB est déjà initialisée
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
 
-echo "🔧 Configuration de la base de données..."
 mysqld --user=mysql --bootstrap << EOF
 USE mysql;
 FLUSH PRIVILEGES;
 
--- Supprimer les utilisateurs anonymes
-DELETE FROM mysql.user WHERE User='';
-
--- Supprimer la base de données de test
-DROP DATABASE IF EXISTS test;
-
--- Créer la base de données WordPress
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 
--- Créer l'utilisateur WordPress
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 
--- Donner tous les droits à l'utilisateur WordPress sur sa base
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
 
--- Changer le mot de passe root
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 
--- Appliquer les changements
 FLUSH PRIVILEGES;
 EOF
+fi
 
-echo "Démarrage de MariaDB..."
-exec mysqld --user=mysql --console --bind-address=0.0.0.0 --port=3306 --skip-networking=0
+exec mysqld --user=mysql --console --bind-address=0.0.0.0 --skip-networking=0
