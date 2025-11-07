@@ -1,12 +1,12 @@
 #!/bin/sh
 set -e
 
-echo "Initialisation MariaDB..."
+mkdir -p /run/mysqld
+chown -R mysql:mysql /run/mysqld
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
-
-mysqld --user=mysql --bootstrap << EOF
+    mysqld --user=mysql --bootstrap << EOF
 USE mysql;
 FLUSH PRIVILEGES;
 
@@ -22,4 +22,4 @@ FLUSH PRIVILEGES;
 EOF
 fi
 
-exec mysqld --user=mysql --console --bind-address=0.0.0.0 --skip-networking=0
+exec mysqld

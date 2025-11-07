@@ -6,6 +6,7 @@ RUN apk add --no-cache \
 	&& mkdir -p /run/mysqld /var/lib/mysql \
 	&& chown -R mysql:mysql /run/mysqld /var/lib/mysql
 
+COPY conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 COPY tools/init-db.sh /usr/local/bin/init-db.sh
 
 RUN chmod +x /usr/local/bin/init-db.sh
